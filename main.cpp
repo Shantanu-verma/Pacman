@@ -6,6 +6,8 @@
 #include <windows.h>
 #include <fstream>
 #include <vector>
+#include <stdio.h>
+
 using namespace std;
 
 // Map Detail
@@ -76,7 +78,7 @@ class pacman{
         wait = 0.1f * CLOCKS_PER_SEC + clock();
         while(clock()<wait){}
     }
-    
+
     // On movement Based Changes
     void move(){
         // Alternate name
@@ -85,7 +87,7 @@ class pacman{
 
         // if user pressed key
         if(kbhit()){
-         
+
         // Record Keys in Uppercase
         char key = getch();
         key = toupper(key);
@@ -219,7 +221,7 @@ class pacman{
     void matsetups(){
         srand(time(NULL));
         int i = 0;
-        
+
         //  n_enemy position initialization
         while(i < n_enemy){
             enemy[i].x = rand()%ROWS;
@@ -227,7 +229,7 @@ class pacman{
             map[cord(enemy[i].x,enemy[i].y)] = ENEMY;
             ++i;
         }
-        
+
         // n_gift Position Initialization
         i = 0;
         while(i < n_gift){
@@ -294,7 +296,7 @@ class pacman{
          enemy = new body[n_enemy];
          matsetups();
     }
-    
+
     // Re-run Game acc. to users choice
     bool rerun() {
         if(game_over()){
@@ -303,7 +305,10 @@ class pacman{
             while(true){
                 cout<<"\n\n\t GAME OVER\n\t > Press Y to continue and N to quit : ";
                 cin>>ch;
-                if(toupper(ch) == 'N') return 0;
+                if(toupper(ch) == 'N') {
+                    cout << "Your score was: " << score << endl;
+                    return 0;
+                }
                 else if(toupper(ch) == 'Y'){
                     reset();
                     system("CLS");
