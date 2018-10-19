@@ -1,3 +1,4 @@
+const uint32_t ROWS = 28 , COLS = 36;
 #include <iostream>
 #include <array>
 #include <stdlib.h>
